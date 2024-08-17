@@ -1,2 +1,2 @@
 # fractal-nethack
-POC idea of nethack maps being generated like a fractal
+POC idea of Nethack maps being generated like a fractal
