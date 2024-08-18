@@ -71,6 +71,14 @@
         document.getElementById('mandelbrot').textContent = output.join('\n');
     }
 
+    function drawState() {
+        const scaleString = `Scale(${scaleFactor.toFixed(2)})`;
+        const panString = `Pan(${panStep.toFixed(2)})`;
+        const offsetString = `Offset(${xOffset.toFixed(2)},${yOffset.toFixed(2)})`;
+        const playerString = `Player(${playerX.toFixed(2)},${playerY.toFixed(2)})`;
+        document.getElementById('state').textContent = `${scaleString}  ${panString} ${offsetString}  ${playerString}`;
+    }
+
     function updatePlayerPosition(offsetX, offsetY) {
         if (output[playerY+offsetY][playerX+offsetX] !== ' ') {
             return;
@@ -92,7 +100,6 @@
         output[playerY] = output[playerY].join('');
 
         document.getElementById('mandelbrot').textContent = output.join('\n');
-        document.getElementById('state').textContent = `Zoom = ${scaleFactor.toFixed(4)}   Offset = (${xOffset.toFixed(4)}, ${yOffset.toFixed(4)})`;
     }
 
     // Event listener for key presses
@@ -113,34 +120,34 @@
             case 'H':
                 xOffset -= panStep;
                 drawMandelbrot();
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 updatePlayerPosition(0, 0);
                 break;
             case 'L':
                 xOffset += panStep;
                 drawMandelbrot();
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 updatePlayerPosition(0, 0);
                 break;
             case 'K':
                 yOffset -= panStep;
                 drawMandelbrot();
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 updatePlayerPosition(0, 0);
                 break;
             case 'J':
                 yOffset += panStep;
                 drawMandelbrot();
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 updatePlayerPosition(0, 0);
                 break;
             case '>': // Move down
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 // zoom *= 1.1;
                 scaleFactor *= 1.1;
                 panStep = 0.1 / scaleFactor;
@@ -148,8 +155,8 @@
                 updatePlayerPosition(0, 0);
                 break;
             case '<': // Move down
-                playerX = Math.round(width/2);
-                playerY = Math.round(height/2);
+                // playerX = Math.round(width/2);
+                // playerY = Math.round(height/2);
                 // zoom *= 0.9;
                 scaleFactor *= 0.9;
                 panStep = 0.1 / scaleFactor;
@@ -158,12 +165,13 @@
                 break;
         }
 
-        document.getElementById('state').textContent = `Zoom = ${scaleFactor.toFixed(4)}   Offset = (${xOffset.toFixed(4)}, ${yOffset.toFixed(4)})`;
+        drawState();
         // Redraw after panning
     });
 
     drawMandelbrot();
     updatePlayerPosition(0, 0);
+    drawState();
 </script>
 </body>
 </html>
